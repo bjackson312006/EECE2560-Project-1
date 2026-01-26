@@ -1,3 +1,5 @@
+#pragma once
+
 class response {
     private:
         int correct;

@@ -1,5 +1,7 @@
 #include "mastermind.hpp"
 #include <limits>
+#include <string>
+#include <sstream>
 
 /* Constructors. */
 mastermind::mastermind(int n, int m) : secret(n,m) { return; } // Initializes 'secret' with user-defined n and m values.
@@ -12,50 +14,55 @@ void mastermind::printSecret(void) const {
 
 /* Reads a guess from the keyboard and returns a code object representing the guess code. */
 const code mastermind::humanGuess(void) const {
-    /* Store the current n and m values based on the secret code. */
-    int n = this->secret.getLength();
-    int m = this->secret.getRange();
+    int n = secret.getLength();
+    int m = secret.getRange();
 
-    /* Infinite loop until input is successful. */
-    while(1) {        
-        std::vector<int> values = { 0 };
-        int x = 0;
+    /* Prompt user to enter in digits. */
+    std::cout << "Enter " << n << " digits (0.." << (m - 1) << ").\n";
+    std::vector<int> values;
+    values.reserve(n);
 
-        /* Prompt user to enter in digits. */
-        std::cout << "Enter " << n << " digits (0.." << (m-1) << "): ";
-        for(int i = 0; i < n; i++) {
-            if(!(std::cin >> x)) {
-                /* handle invalid input */
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-                std::cout << "Invalid input: please enter integers only." << std::endl;
-                values.clear();
+    /* Loop through each integer input individually. */
+    for(int i = 0; i < n; i++) {
+        /* Inner infinite loop to validate individual integer inputs. */
+        while(1) {
+            std::cout << "Integer " << (i + 1) << ": ";
+
+            /* Using this instead of normal cin because it makes it easier to validate input. */
+            std::string line;
+            std::getline(std::cin >> std::ws, line); // Reads the whole line
+            std::stringstream ss(line);
+
+            int x;
+            char extra;
+
+            /* Make sure input is a single integer. */
+            if (!(ss >> x) || (ss >> extra)) {
+                std::cout << "Invalid input (must be a single integer value).\n";
                 continue;
             }
-            values.push_back(x);
-        }
-        if(values.size() != n) { continue; } // Make sure values is the correct size based on 'n'.
 
-        /* Ensure the values are within range. */
-        bool status = true;
-        for(int i = 0; i < values.size(); i++) {
-            int value = values[i];
-            if((value < 0) || (value >= m)) {
-                status = false;
-                break;
+            /* Make sure input is within range. */
+            if (x < 0 || x >= m) {
+                std::cout << "Out of range. Must be 0.." << (m - 1) << ".\n";
+                continue;
             }
-        }
-        if(!status) {
-            std::cout << "Out of range. Digits must be 0.." << (m-1) << "." << std::endl;
-            continue;
-        }
 
-        /* Create the guess, initialize it with the values, and return it. */
-        code guess(n, m);
-        guess.initializeWithValues(values);
-        return guess;
+            /* Valid input for this digit, so go to the next digit. */
+            values.push_back(x);
+            break;
+        }
     }
+
+    /* Finalize guess. */
+    code guess(n, m);
+    guess.initializeWithValues(values);
+    std::cout << std::endl << "Your guess: ";
+    guess.print();
+    std::cout << std::endl;
+    return guess;
 }
+
 
 /* Gets the response to a guess. */
 const response mastermind::getResponse(const code& guess) const {
