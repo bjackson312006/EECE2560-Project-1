@@ -3,29 +3,8 @@
 
 using namespace std;
 
-class response {
-    private:
-        int correct;
-        int incorrect;
-
-    public:
-        // Constructor
-        response::response(int corr = 0, int incorr = 0) {
-            correct = corr;
-            incorrect = incorr;
-        }
-
-    // Getters
-    int getCorrect() { return correct; }
-    int getIncorrect() { return incorrect; }
-
-    // Setters
-    void setCorrect(int c) { correct = c; }
-    void setIncorrect(int i) { incorrect = i; }
-};
-
 // Constructor
-response::response(int corr = 0, int incorr = 0) {
+response::response(int corr, int incorr) {
     correct = corr;
     incorrect = incorr;
 }
