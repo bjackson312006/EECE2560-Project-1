@@ -17,7 +17,7 @@ class response {
 };
 
 // Global operator<<
-ostream& operator<<(ostream& os, response r);
+std::ostream& operator<<(std::ostream& os, response r);
 
 // Global operator==
 bool operator==(response r1, response r2);
