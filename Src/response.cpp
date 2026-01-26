@@ -10,8 +10,8 @@ response::response(int corr, int incorr) {
 }
 
 // Getters
-int response::getCorrect() { return correct; }
-int response::getIncorrect() { return incorrect; }
+int response::getCorrect() const { return correct; }
+int response::getIncorrect() const { return incorrect; }
 
 // Setters
 void response::setCorrect(int c) { correct = c; }

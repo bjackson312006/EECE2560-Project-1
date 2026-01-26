@@ -8,10 +8,16 @@ class response {
         response(int corr = 0, int incorr = 0);
 
         // Getters
-        int getCorrect();
-        int getIncorrect();
+        int getCorrect() const;
+        int getIncorrect() const;
 
         // Setters
         void setCorrect(int c);
         void setIncorrect(int i);
 };
+
+// Global operator<<
+ostream& operator<<(ostream& os, response r);
+
+// Global operator==
+bool operator==(response r1, response r2);

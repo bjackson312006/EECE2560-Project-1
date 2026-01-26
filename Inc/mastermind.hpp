@@ -1,4 +1,5 @@
 #include "code.hpp"
+#include "response.hpp"
 
 class mastermind {
     private:
@@ -13,4 +14,13 @@ class mastermind {
 
         /* Reads a guess from the keyboard and returns a code object representing the guess code. */
         const code humanGuess(void) const;
+
+        /* Gets the response to a guess. */
+        const response getResponse(const code& guess) const;
+
+        /* Checks if a response object is solved or not. */
+        const bool isSolved(const response& response) const;
+
+        /* Plays the game. */
+        const void playGame(void);
 };

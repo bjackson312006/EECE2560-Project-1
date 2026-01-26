@@ -56,3 +56,51 @@ const code mastermind::humanGuess(void) const {
         return guess;
     }
 }
+
+/* Gets the response to a guess. */
+const response mastermind::getResponse(const code& guess) const {
+    int correct = secret.checkCorrect(guess);
+    int incorrect = secret.checkIncorrect(guess);
+    return response(correct, incorrect);
+}
+
+/* Checks if a response object is solved or not. */
+const bool mastermind::isSolved(const response& response) const {
+    return response.getCorrect() == this->secret.getLength();
+}
+
+/* Plays the game. */
+const void mastermind::playGame(void) {
+    /* Track seeding state (so you only seed once). */
+    static bool seeded = false;
+    if(seeded == false) {
+        std::srand(std::time(nullptr));
+        seeded = true;
+    }
+
+    /* Init the secret and print it. */
+    this->secret.initializeRandom();
+    std::cout << "Secret code (for testing): ";
+    this->secret.print();
+    std::cout << std::endl;
+
+    /* Actual game */
+    constexpr int MAX_GUESSES = 10;
+    for(int attempt = 1; attempt <= MAX_GUESSES; attempt++) {
+        std::cout << std::endl << "Guess " << attempt << " of " << MAX_GUESSES << std::endl;
+        code guess = humanGuess();
+        response r = getResponse(guess);
+        std::cout << r << std::endl;
+        if(isSolved(r)) {
+            std::cout << "You win! Solved in " << attempt << " guesses!" << endl;
+            return;
+        }
+    }
+
+    /* If this point is reached, player must've used all guesses (so they lost). */
+    std::cout << "You lose! You did not solve the code in 10 guesses." << std::endl;
+    std::cout << "The secret code was: ";
+    this->secret.print();
+    std::cout << std::endl;
+
+}
