@@ -20,8 +20,9 @@ code createAndPrintSecretCode(int length, int digRange)
 
     code secret(length, digRange);
     secret.initializeRandom();
+    std::cout << "Secret=";
     secret.print();
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
     return secret;
 }
 
@@ -94,9 +95,11 @@ void printSampleGuessResults(const code& secret,
 
         std::cout << "Guess " << i + 1 << ": ";
         guesses[i].print();
-        std::cout << " -> ";
-        std::cout << secret.checkCorrect(guesses[i]) << " ";
-        std::cout << secret.checkIncorrect(guesses[i]) << std::endl;
+        std::cout << std::endl;
+        std::cout << "Results: ";
+        std::cout << "checkCorrect=" << secret.checkCorrect(guesses[i]) << " ";
+        std::cout << "checkIncorrect=" << secret.checkIncorrect(guesses[i])
+                  << std::endl << std::endl;
     }
 }
 
