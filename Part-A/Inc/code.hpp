@@ -70,10 +70,16 @@ public:
     //
     // Returns the length of the code.
     //
-    int getLength() const { return n; }
+    int getLength() const
+    {
+        return n;
+    }
     
     //
     // Returns the digit range value m.
     //
-    int getRange() const { return m; }
+    int getRange() const
+    {
+        return m;
+    }
 };
