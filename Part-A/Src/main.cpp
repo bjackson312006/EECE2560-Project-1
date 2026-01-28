@@ -118,7 +118,7 @@ void printSampleGuessResults(const code& secret,
         cout << "checkCorrect=" << secret.checkCorrect(guesses[i]) << " ";
         cout << "checkIncorrect=" << secret.checkIncorrect(guesses[i])
              << endl << endl;
-    }
+    } // end for
 } // end printSampleGuessResults
 
 int main()
@@ -128,7 +128,7 @@ int main()
 //
 {
     const int length = 5;
-    const int digRange = 10;
+    const int digRange = 7;
 
     if (length <= 0 || digRange <= 0)
     {

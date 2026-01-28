@@ -140,8 +140,8 @@ int code::checkIncorrect(const code& guess) const
                     break;
                 }
             }
-        }
-    }
+        } // end if
+    } // end for
     
     return incorrectCount;
 } // end code::checkIncorrect
