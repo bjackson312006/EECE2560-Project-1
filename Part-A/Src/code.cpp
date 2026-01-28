@@ -48,7 +48,7 @@ void code::initializeWithValues(const vector<int>& values)
 //
 {
     
-    if (values.size() != n)
+    if (values.size() != static_cast<size_t>(n))
     {
         cerr << "Error: values size does not match code length" << endl;
         return;
