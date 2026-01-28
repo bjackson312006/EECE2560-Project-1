@@ -28,58 +28,59 @@ private:
     int m;               // Range of digits [0, m-1]
 
 public:
+    code(int length, int range);
     //
     // Initializes a code object with given length and digit range.
     // length is the number of digits and range is the digit range.
     // Assumes length > 0 and range > 0.
     //
-    code(int length, int range);
     
+    void initializeRandom();
     //
     // Initializes the code with random digits in the range [0, m-1].
     // Assumes m > 0.
     //
-    void initializeRandom();
     
+    void initializeWithValues(const vector<int>& values);
     //
     // Initializes the code with specific values from a vector.
     // values is the digit list and must match the code length.
     // Assumes values.size() == n and values are in [0, m-1].
     //
-    void initializeWithValues(const vector<int>& values);
     
+    int checkCorrect(const code& guess) const;
     //
     // Returns number of digits correct in both value and position.
     // guess is the code object to compare.
     // Assumes guess has the same length as this code.
     //
-    int checkCorrect(const code& guess) const;
     
+    int checkIncorrect(const code& guess) const;
     //
     // Returns number of digits correct in value but wrong position.
     // guess is the code object to compare.
     // Assumes guess has the same length as this code.
     //
-    int checkIncorrect(const code& guess) const;
     
+    void print() const;
     //
     // Prints the code to standard output.
     //
-    void print() const;
     
+    int getLength() const
     //
     // Returns the length of the code.
     //
-    int getLength() const
     {
         return n;
     }
     
+    int getRange() const
     //
     // Returns the digit range value m.
     //
-    int getRange() const
     {
         return m;
     }
 };
+// end class code

@@ -11,12 +11,12 @@
 
 using namespace std;
 
+code createAndPrintSecretCode(int length, int digRange)
 //
 // Creates and prints a random secret code.
 // length is number of digits and digRange is range [0, m-1].
 // Assumes length > 0 and digRange > 0.
 //
-code createAndPrintSecretCode(int length, int digRange)
 {
     
     if (length <= 0 || digRange <= 0)
@@ -32,14 +32,14 @@ code createAndPrintSecretCode(int length, int digRange)
     secret.print();
     cout << endl << endl;
     return secret;
-}
+} // end createAndPrintSecretCode
 
+code createSampleGuess(int length, int digRange, const vector<int>& values)
 //
 // Creates a guess code from the provided values.
 // length is number of digits and digRange is range [0, m-1].
 // Assumes values.size() == length and values are within range.
 //
-code createSampleGuess(int length, int digRange, const vector<int>& values)
 {
     
     if (length <= 0 || digRange <= 0)
@@ -58,14 +58,14 @@ code createSampleGuess(int length, int digRange, const vector<int>& values)
     code guess(length, digRange);
     guess.initializeWithValues(values);
     return guess;
-}
+} // end createSampleGuess
 
+vector<code> createThreeSampleGuesses(int length, int digRange)
 //
 // Creates the three required sample guesses.
 // length is number of digits and digRange is range [0, m-1].
 // Assumes length > 0 and digRange > 0.
 //
-vector<code> createThreeSampleGuesses(int length, int digRange)
 {
     
     if (length <= 0 || digRange <= 0)
@@ -83,15 +83,15 @@ vector<code> createThreeSampleGuesses(int length, int digRange)
     guesses.push_back(createSampleGuess(length, digRange,
         vector<int>{1, 3, 3, 4, 5}));
     return guesses;
-}
+} // end createThreeSampleGuesses
 
+void printSampleGuessResults(const code& secret,
+                             const vector<code>& guesses)
 //
 // Prints the checkCorrect/checkIncorrect results for the sample guesses.
 // secret is the code to compare against and guesses are the sample codes.
 // Assumes secret and guesses have matching lengths and ranges.
 //
-void printSampleGuessResults(const code& secret,
-                             const vector<code>& guesses)
 {
     
     if (guesses.empty())
@@ -119,13 +119,13 @@ void printSampleGuessResults(const code& secret,
         cout << "checkIncorrect=" << secret.checkIncorrect(guesses[i])
              << endl << endl;
     }
-}
+} // end printSampleGuessResults
 
+int main()
 //
 // Runs the Part A sample checks against a random secret code.
 // Assumes length > 0 and digRange > 0.
 //
-int main()
 {
     const int length = 5;
     const int digRange = 10;
@@ -144,4 +144,4 @@ int main()
     printSampleGuessResults(secret, guesses);
 
     return 0;
-}
+} // end main

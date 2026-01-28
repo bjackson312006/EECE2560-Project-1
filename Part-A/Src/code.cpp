@@ -5,12 +5,12 @@
 //
 #include "code.hpp"
 
+code::code(int length, int range)
 //
 // Initializes a code object with given length and digit range
 // length is the number of digits and range is the digit range
 // Assumes length > 0 and range > 0
 //
-code::code(int length, int range)
 {
     
     if (length <= 0 || range <= 0)
@@ -27,11 +27,11 @@ code::code(int length, int range)
     digits.resize(n, 0);
 }
 
+void code::initializeRandom()
 //
 // Initializes the code with random values in [0, m-1]
 // Assumes m > 0
 //
-void code::initializeRandom()
 {
     
     for (int i = 0; i < n; i++)
@@ -40,12 +40,12 @@ void code::initializeRandom()
     }
 }
 
+void code::initializeWithValues(const vector<int>& values)
 //
 // Initializes the code with specific values.
 // values is the digit list and must match the code length
 // Assumes values.size() == n and values are in [0, m-1]
 //
-void code::initializeWithValues(const vector<int>& values)
 {
     
     if (values.size() != n)
@@ -66,14 +66,14 @@ void code::initializeWithValues(const vector<int>& values)
     }
     
     digits = values;
-}
+} // end code::initializeWithValues
 
+int code::checkCorrect(const code& guess) const
 //
 // Returns number of digits correct in both value and position
 // guess is the code object to compare
 // Assumes guess has the same length as this code
 //
-int code::checkCorrect(const code& guess) const
 {
     
     if (guess.n != n)
@@ -95,12 +95,12 @@ int code::checkCorrect(const code& guess) const
     return correctCount;
 }
 
+int code::checkIncorrect(const code& guess) const
 //
 // Returns number of digits correct in value but wrong position
 // guess is the code object to compare
 // Assumes guess has the same length as this code
 //
-int code::checkIncorrect(const code& guess) const
 {
     
     if (guess.n != n)
@@ -144,12 +144,12 @@ int code::checkIncorrect(const code& guess) const
     }
     
     return incorrectCount;
-}
+} // end code::checkIncorrect
 
+void code::print() const
 //
 // Prints the secret code in a user-friendly format
 //
-void code::print() const
 {
     cout << "(";
     
