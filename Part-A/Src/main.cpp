@@ -1,9 +1,15 @@
+//
+// Brian Mack, Juan Ipina, Blake Jackson, james Su
+// Project #1 MasterMind-a Upload Link
+// Main program for Part A sample checks.
+//
 #include <iostream>
 #include <vector>
 #include <cstdlib>
 #include <ctime>
 #include "code.hpp"
-#include "response.hpp"
+
+using namespace std;
 
 //
 // Creates and prints a random secret code.
@@ -12,17 +18,19 @@
 //
 code createAndPrintSecretCode(int length, int digRange)
 {
-    if (length <= 0 || digRange <= 0) {
-        std::cerr << "Error: length and digRange must be positive integers"
-                  << std::endl;
+    
+    if (length <= 0 || digRange <= 0)
+    {
+        cerr << "Error: length and digRange must be positive integers"
+             << endl;
         return code(1, 1);
     }
 
     code secret(length, digRange);
     secret.initializeRandom();
-    std::cout << "Secret=";
+    cout << "Secret=";
     secret.print();
-    std::cout << std::endl << std::endl;
+    cout << endl << endl;
     return secret;
 }
 
@@ -31,16 +39,19 @@ code createAndPrintSecretCode(int length, int digRange)
 // length is number of digits and digRange is range [0, m-1].
 // Assumes values.size() == length and values are within range.
 //
-code createSampleGuess(int length, int digRange, const std::vector<int>& values)
+code createSampleGuess(int length, int digRange, const vector<int>& values)
 {
-    if (length <= 0 || digRange <= 0) {
-        std::cerr << "Error: length and digRange must be positive integers"
-                  << std::endl;
+    
+    if (length <= 0 || digRange <= 0)
+    {
+        cerr << "Error: length and digRange must be positive integers"
+             << endl;
         return code(1, 1);
     }
 
-    if (static_cast<int>(values.size()) != length) {
-        std::cerr << "Error: values size does not match length" << std::endl;
+    if (static_cast<int>(values.size()) != length)
+    {
+        cerr << "Error: values size does not match length" << endl;
         return code(length, digRange);
     }
 
@@ -54,21 +65,23 @@ code createSampleGuess(int length, int digRange, const std::vector<int>& values)
 // length is number of digits and digRange is range [0, m-1].
 // Assumes length > 0 and digRange > 0.
 //
-std::vector<code> createThreeSampleGuesses(int length, int digRange)
+vector<code> createThreeSampleGuesses(int length, int digRange)
 {
-    if (length <= 0 || digRange <= 0) {
-        std::cerr << "Error: length and digRange must be positive integers"
-                  << std::endl;
-        return std::vector<code>();
+    
+    if (length <= 0 || digRange <= 0)
+    {
+        cerr << "Error: length and digRange must be positive integers"
+             << endl;
+        return vector<code>();
     }
 
-    std::vector<code> guesses;
+    vector<code> guesses;
     guesses.push_back(createSampleGuess(length, digRange,
-        std::vector<int>{5, 0, 3, 2, 6}));
+        vector<int>{5, 0, 3, 2, 6}));
     guesses.push_back(createSampleGuess(length, digRange,
-        std::vector<int>{2, 1, 2, 2, 2}));
+        vector<int>{2, 1, 2, 2, 2}));
     guesses.push_back(createSampleGuess(length, digRange,
-        std::vector<int>{1, 3, 3, 4, 5}));
+        vector<int>{1, 3, 3, 4, 5}));
     return guesses;
 }
 
@@ -78,28 +91,33 @@ std::vector<code> createThreeSampleGuesses(int length, int digRange)
 // Assumes secret and guesses have matching lengths and ranges.
 //
 void printSampleGuessResults(const code& secret,
-                             const std::vector<code>& guesses)
+                             const vector<code>& guesses)
 {
-    if (guesses.empty()) {
-        std::cerr << "Error: guesses list is empty" << std::endl;
+    
+    if (guesses.empty())
+    {
+        cerr << "Error: guesses list is empty" << endl;
         return;
     }
 
-    for (int i = 0; i < static_cast<int>(guesses.size()); i++) {
+    for (int i = 0; i < static_cast<int>(guesses.size()); i++)
+    {
+        
         if (guesses[i].getLength() != secret.getLength() ||
-            guesses[i].getRange() != secret.getRange()) {
-            std::cerr << "Error: guess length or range does not match secret"
-                      << std::endl;
+            guesses[i].getRange() != secret.getRange())
+        {
+            cerr << "Error: guess length or range does not match secret"
+                 << endl;
             continue;
         }
 
-        std::cout << "Guess " << i + 1 << ": ";
+        cout << "Guess " << i + 1 << ": ";
         guesses[i].print();
-        std::cout << std::endl;
-        std::cout << "Results: ";
-        std::cout << "checkCorrect=" << secret.checkCorrect(guesses[i]) << " ";
-        std::cout << "checkIncorrect=" << secret.checkIncorrect(guesses[i])
-                  << std::endl << std::endl;
+        cout << endl;
+        cout << "Results: ";
+        cout << "checkCorrect=" << secret.checkCorrect(guesses[i]) << " ";
+        cout << "checkIncorrect=" << secret.checkIncorrect(guesses[i])
+             << endl << endl;
     }
 }
 
@@ -110,18 +128,19 @@ void printSampleGuessResults(const code& secret,
 int main()
 {
     const int length = 5;
-    const int digRange = 9;
+    const int digRange = 10;
 
-    if (length <= 0 || digRange <= 0) {
-        std::cerr << "Error: length and digRange must be positive integers"
-                  << std::endl;
+    if (length <= 0 || digRange <= 0)
+    {
+        cerr << "Error: length and digRange must be positive integers"
+             << endl;
         return 1;
     }
 
-    std::srand(std::time(0));
+    srand(time(0));
     code secret = createAndPrintSecretCode(length, digRange);
 
-    std::vector<code> guesses = createThreeSampleGuesses(length, digRange);
+    vector<code> guesses = createThreeSampleGuesses(length, digRange);
     printSampleGuessResults(secret, guesses);
 
     return 0;

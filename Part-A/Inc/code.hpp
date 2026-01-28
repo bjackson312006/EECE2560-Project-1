@@ -1,3 +1,8 @@
+//
+// Brian Mack, Juan Ipina, Blake Jackson, james Su
+// Project #1 MasterMind-a Upload Link
+// Header for the code class used by the Mastermind game.
+//
 #pragma once
 
 #include <iostream>
@@ -6,15 +11,17 @@
 #include <ctime>
 
 using namespace std;
-
 /**
- * Mastermind code - Codebreaker is prompted two integers n and m, where n is the length of the code 
- * and m is the range of digits [0, m-1]. Codemaker then creates a secret code of length n with digits in the range [0, m-1].
- * Codebreaker makes guesses and receives feedback on how many digits are correct and in the correct position,
- * and how many digits are correct but in the wrong position.
+ * Mastermind code - Codebreaker is prompted two integers n and m, where n is
+ * the length of the code and m is the range of digits [0, m-1]. Codemaker then
+ * creates a secret code of length n with digits in the range [0, m-1].
+ * Codebreaker makes guesses and receives feedback on how many digits are
+ * correct and in the correct position, and how many digits are correct but in
+ * the wrong position.
  */
 
-class code {
+class code
+{
 private:
     vector<int> digits;  // The code digits
     int n;               // Length of the code
