@@ -5,10 +5,12 @@
 //
 #include "code.hpp"
 
+code::code(int length, int range)
 //
 // Constructor implementation
+// length is the number of digits and range is the digit range
+// Assumes length > 0 and range > 0
 //
-code::code(int length, int range)
 {
     
     if (length <= 0 || range <= 0)
@@ -25,10 +27,11 @@ code::code(int length, int range)
     digits.resize(n, 0);
 }
 
+void code::initializeRandom()
 //
 // Initialize code with random values
+// Assumes m > 0
 //
-void code::initializeRandom()
 {
     
     for (int i = 0; i < n; i++)
@@ -37,10 +40,12 @@ void code::initializeRandom()
     }
 }
 
+void code::initializeWithValues(const vector<int>& values)
 //
 // Initialize code with specific values
+// values is the digit list and must match the code length
+// Assumes values.size() == n and values are in [0, m-1]
 //
-void code::initializeWithValues(const vector<int>& values)
 {
     
     if (values.size() != n)
@@ -61,12 +66,15 @@ void code::initializeWithValues(const vector<int>& values)
     }
     
     digits = values;
-}
+} // end initializeWithValues
 
+int code::checkCorrect(const code& guess) const
 //
 // Check correct digits in correct positions
+// guess is the code object to compare against this code
+// Returns number of digits that match in both value and position
+// Assumes guess has the same length as this code
 //
-int code::checkCorrect(const code& guess) const
 {
     
     if (guess.n != n)
@@ -86,12 +94,15 @@ int code::checkCorrect(const code& guess) const
         }
     }
     return correctCount;
-}
+} // end checkCorrect
 
+int code::checkIncorrect(const code& guess) const
 //
 // Check correct digits in incorrect positions
+// guess is the code object to compare against this code
+// Returns number of digits that match in value but not in position
+// Assumes guess has the same length as this code
 //
-int code::checkIncorrect(const code& guess) const
 {
     
     if (guess.n != n)
@@ -135,12 +146,12 @@ int code::checkIncorrect(const code& guess) const
     }
     
     return incorrectCount;
-}
+} // end checkIncorrect
 
+void code::print() const
 //
 // Print the code
 //
-void code::print() const
 {
     cout << "(";
     

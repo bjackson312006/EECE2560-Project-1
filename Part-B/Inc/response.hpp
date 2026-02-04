@@ -14,32 +14,44 @@ private:
     int incorrect;
 
 public:
+    response(int corr = 0, int incorr = 0);
     //
     // Constructor
+    // corr is number correct and incorr is number incorrect
+    // Assumes corr >= 0 and incorr >= 0
     //
-    response(int corr = 0, int incorr = 0);
 
-    //
-    // Getters
-    //
     int getCorrect() const;
+    //
+    // Returns the stored correct count
+    //
 
     int getIncorrect() const;
+    //
+    // Returns the stored incorrect count
+    //
 
-    //
-    // Setters
-    //
     void setCorrect(int c);
+    //
+    // Sets the stored correct count
+    // Assumes c >= 0
+    //
 
     void setIncorrect(int i);
+    //
+    // Sets the stored incorrect count
+    // Assumes i >= 0
+    //
 };
 
+std::ostream& operator<<(std::ostream& os, response r);
 //
 // Global operator<<
+// os is the output stream and r is the response to print
 //
-std::ostream& operator<<(std::ostream& os, response r);
 
+bool operator==(response r1, response r2);
 //
 // Global operator==
+// r1 and r2 are responses to compare
 //
-bool operator==(response r1, response r2);

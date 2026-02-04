@@ -8,56 +8,66 @@
 
 using namespace std;
 
+response::response(int corr, int incorr)
 //
 // Constructor
+// corr is number correct and incorr is number incorrect
+// Assumes corr >= 0 and incorr >= 0
 //
-response::response(int corr, int incorr)
 {
     correct = corr;
     incorrect = incorr;
 }
 
-//
-// Getters
-//
 int response::getCorrect() const
+//
+// Returns the stored correct count
+//
 {
     return correct;
 }
 
-//
 int response::getIncorrect() const
+//
+// Returns the stored incorrect count
+//
 {
     return incorrect;
 }
 
-//
-// Setters
-//
 void response::setCorrect(int c)
+//
+// Sets the stored correct count
+// Assumes c >= 0
+//
 {
     correct = c;
 }
 
-//
 void response::setIncorrect(int i)
+//
+// Sets the stored incorrect count
+// Assumes i >= 0
+//
 {
     incorrect = i;
 }
 
+bool operator==(response r1, response r2)
 //
 // Global operator==
+// r1 and r2 are responses to compare
 //
-bool operator==(response r1, response r2)
 {
     return r1.getCorrect() == r2.getCorrect() &&
            r1.getIncorrect() == r2.getIncorrect();
 }
 
+ostream& operator<<(ostream& os, response r)
 //
 // Global operator<<
+// r is the response to print
 //
-ostream& operator<<(ostream& os, response r)
 {
     os << "Correct: " << r.getCorrect()
        << ", Incorrect: " << r.getIncorrect();

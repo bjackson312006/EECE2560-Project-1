@@ -29,35 +29,36 @@ private:
     int m;               // Range of digits [0, m-1]
 
 public:
+    code(int length, int range);
     //
     // Constructor - initializes a code object with given length and digit range
     // length is the number of digits in the code (n)
     // range is the range of possible digits [0, m-1]
     // Assumes length > 0 and range > 0
     //
-    code(int length, int range);
     
+    void initializeRandom();
     //
     // Initializes the code with random digits in the range [0, m-1]
     // Uses rand() to generate random values
     //
-    void initializeRandom();
     
+    void initializeWithValues(const vector<int>& values);
     //
     // Initializes the code with specific values from a vector
     // values is the vector of integers to set as the code
     // Assumes values.size() == n and all values in range [0, m-1]
     //
-    void initializeWithValues(const vector<int>& values);
     
+    int checkCorrect(const code& guess) const;
     //
     // Checks how many digits in the guess are correct and in correct location
     // guess is the guess code object to compare against this code
     // Returns number of digits that match in both value and position
     // Assumes guess has the same length as this code
     //
-    int checkCorrect(const code& guess) const;
     
+    int checkIncorrect(const code& guess) const;
     //
     // Checks how many digits in the guess are correct but in wrong location
     // guess is the guess code object to compare against this code
@@ -65,25 +66,24 @@ public:
     // Assumes guess has the same length as this code
     // Note: Digits already counted as correct position are not counted here
     //
-    int checkIncorrect(const code& guess) const;
     
+    void print() const;
     //
     // Prints the code to console
     //
-    void print() const;
     
+    int getLength() const
     //
     // Gets the length of the code
     //
-    int getLength() const
     {
         return n;
     }
     
+    int getRange() const
     //
     // Gets the range of the code
     //
-    int getRange() const
     {
         return m;
     }
