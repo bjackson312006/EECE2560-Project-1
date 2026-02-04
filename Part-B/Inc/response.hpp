@@ -1,25 +1,45 @@
+//
+// Brian Mack, Juan Ipina, Blake Jackson, james Su
+// Project #1 MasterMind-b Upload Link
+// Header for the response class used by the Mastermind game
+//
 #pragma once
 
-class response {
-    private:
-        int correct;
-        int incorrect;
+#include <iostream>
 
-    public:
-        // Constructor
-        response(int corr = 0, int incorr = 0);
+class response
+{
+private:
+    int correct;
+    int incorrect;
 
-        // Getters
-        int getCorrect() const;
-        int getIncorrect() const;
+public:
+    //
+    // Constructor
+    //
+    response(int corr = 0, int incorr = 0);
 
-        // Setters
-        void setCorrect(int c);
-        void setIncorrect(int i);
+    //
+    // Getters
+    //
+    int getCorrect() const;
+
+    int getIncorrect() const;
+
+    //
+    // Setters
+    //
+    void setCorrect(int c);
+
+    void setIncorrect(int i);
 };
 
+//
 // Global operator<<
+//
 std::ostream& operator<<(std::ostream& os, response r);
 
+//
 // Global operator==
+//
 bool operator==(response r1, response r2);

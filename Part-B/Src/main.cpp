@@ -1,3 +1,8 @@
+//
+// Brian Mack, Juan Ipina, Blake Jackson, james Su
+// Project #1 MasterMind-b Upload Link
+// Main program for Part B interactive game
+//
 #include <iostream>
 #include <string>
 #include <limits>
@@ -14,11 +19,13 @@ using namespace std;
 //
 int readInt(const string& prompt)
 {
+    
     while (1)
     {
         cout << prompt;
         int value;
 
+        
         if (cin >> value)
         {
             return value;
@@ -26,7 +33,9 @@ int readInt(const string& prompt)
 
         cout << "Invalid input. Must be a single integer." << endl;
         cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); //clear input so the next attempt is fresh
+        
+        // Clear input so the next attempt is fresh
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 }
 
@@ -37,11 +46,13 @@ int readInt(const string& prompt)
 //
 void readCodeSettings(int& n, int& m)
 {
+    
     while (1)
     {
         n = readInt("Enter code length n: ");
         m = readInt("Enter digit range m: ");
 
+        
         if (n <= 0 || m <= 0)
         {
             cout << "n and m must be positive integers." << endl;
